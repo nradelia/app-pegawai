@@ -4,9 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Input Pegawai</title>
 </head>
 <body>
+    @extends('master')
+    @section('title', 'Input Pegawai')
+    @section('content')
     <h1 class="mb-4">Form Pegawai</h1>
     <form action="{{ route('employees.store') }}" method="POST">
         @csrf
@@ -36,6 +39,26 @@
                 <td><input type="date" id="tanggal_masuk" name="tanggal_masuk"></td>
             </tr>
             <tr>
+                <td><label for="department_id">Department:</label></td>
+                <td>
+                    <select name="department_id" id="department_id">
+                        @foreach($departments as $dept)
+                        <option value="{{ $dept->id }}">{{ $dept->nama_department }}</option>
+                        @endforeach
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="jabatan_id">Jabatan:</label></td>
+                <td>
+                    <select name="jabatan_id" id="jabatan_id">
+                        @foreach ($positions as $pos)
+                        <option value="{{ $pos->id }}">{{ $pos->nama_jabatan }}</option>
+                        @endforeach
+                    </select>
+                </td>
+            </tr>
+            <tr>
                 <td><label for="status">Status</label></td>
                 <td>
                     <select name="status" id="status">
@@ -51,5 +74,6 @@
             </tr>
         </table>
     </form>
+    @endsection
 </body>
 </html>

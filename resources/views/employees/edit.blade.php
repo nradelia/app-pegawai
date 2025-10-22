@@ -4,9 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Edit Pegawai</title>
 </head>
 <body>
+    @extends('master')
+    @section('title', 'Edit Pegawai')
+    @section('content')
     <h2>Edit Data Pegawai</h2>
     <form action="{{ route('employees.update', $employee->id) }}" method="POST">
         @csrf
@@ -36,12 +39,32 @@
                 <td>Tanggal Masuk</td>
                 <td><input type="date" name="tanggal_masuk" value="{{ old('tanggal_masuk', $employee->tanggal_masuk) }}"></td>
             </tr>
-             <tr>
+            <tr>
+                <td>Department</td>
+                <td>
+                    <select name="department_id" id="department_id" required>
+                        @foreach($departments as $dept)
+                        <option value="{{ $dept->id }}" {{ $dept->id ==$employee->department_id ? 'selected' : ''}}>{{ $dept->nama_department }}</option>
+                        @endforeach
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Jabatan</td>
+                <td>
+                    <select name="jabatan_id" id="jabatan_id">
+                        @foreach ($positions as $pos)
+                        <option value="{{ $pos->id }}" {{ $pos->id == $employee->jabatan_id ? 'selected' : '' }}>{{ $pos->nama_jabatan }}</option>
+                        @endforeach
+                    </select>
+                </td>
+            </tr>
+            <tr>
                 <td>Status</td>
                 <td>
                     <select name="status">
                         <option value="aktif" {{ old('status', $employee->status) == 'aktif' ? 'selected' : '' }}>Aktif</option>
-                        <option value="tidak aktif" {{ old('status', $employee->status) == 'tidak aktif' ? 'selected' : '' }}>Tidak Aktif</option>
+                        <option value="nonaktif" {{ old('status', $employee->status) == 'nonaktif' ? 'selected' : '' }}>Nonaktif</option>
                     </select>
                 </td>
             </tr>
@@ -52,5 +75,6 @@
             </tr>
         </table>
     </form>
+    @endsection
 </body>
 </html>

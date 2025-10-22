@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Daftar Pegawai</title>
 </head>
 <body>
     @extends('master')
@@ -12,6 +12,7 @@
     @section('content')
     <div class="container mt-5">
         <h1 class="mb-4">Daftar Pegawai</h1>
+        <button type="button" onclick="window.location='{{ route('employees.create') }}'">Tambah Pegawai</button>
         <table border="1" cellpadding="5" cellspacing="0">
             <thead>
                 <tr>
@@ -21,6 +22,8 @@
                     <th>Tanggal Lahir</th>
                     <th>Alamat</th>
                     <th>Tanggal Masuk</th>
+                    <th>Department</th>
+                    <th>Jabatan</th>
                     <th>Status</th>
                     <th>Aksi</th>
                 </tr>
@@ -34,6 +37,8 @@
                     <td>{{ $employee->tanggal_lahir }}</td>
                     <td>{{ $employee->alamat }}</td>
                     <td>{{ $employee->tanggal_masuk }}</td>
+                    <td>{{ $employee->department->nama_department ?? '-' }}</td>
+                    <td>{{ $employee->position->nama_jabatan ?? '-' }}</td>
                     <td>{{ $employee->status }}</td>
                     <td>
                         <a href="{{ route('employees.show', $employee->id) }}">Detail</a> |
